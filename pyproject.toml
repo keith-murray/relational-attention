@@ -7,7 +7,13 @@ authors = [
     { name = "Keith T. Murray", email = "murraykeith64@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.7",
+    "seaborn>=0.13.2",
+    "torch>=2.9.0",
+    "tqdm>=4.67.1",
+]
 
 [project.scripts]
 relational-attention = "relational_attention:main"
