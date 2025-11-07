@@ -1,0 +1,58 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{multirow}
+\usepackage[margin=0.6in]{geometry}  
+
+\begin{document}
+The self-attention mechanism can be written as:
+\begin{align*} 
+\operatorname{Self}&\operatorname{Attention}(X; W_q, W_k, W_v) \\
+&= \operatorname{softmax}\!\left(\frac{(XW_q)(XW_k)^\top}{\sqrt{d_k}}\right)(XW_v)
+\end{align*}
+
+The relational-attention mechanism can be written as:
+\begin{align*} 
+\operatorname{Relational}&\operatorname{Attention}(X; W_q, W_k, V) \\
+&= \operatorname{softmax}\!\left(\frac{(XW_q)(XW_k)^\top}{\sqrt{d_k}}\right)V
+\end{align*}
+
+The exclusive or (XOR) task can be described by:
+\begin{table}[h]
+\centering
+\begin{tabular}{c c | c}
+\hline
+$A$ & $B$ & $A \oplus B$ \\
+\hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\hline
+\end{tabular}
+\caption{Truth table for XOR.}
+\end{table}
+
+The pairwise transitive inference task can be described by:
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c | c}
+\hline
+Obs.? & $x_i$ & $x_j$ & $x_i > x_j$ \\
+\hline
+\multirow{4}{*}{Yes} 
+  & A & B & 1 \\
+  & B & C & 1 \\
+  & B & A & 0 \\
+  & C & B & 0 \\
+\hline
+\multirow{2}{*}{No} 
+  & A & C & 1 \\
+  & C & A & 0 \\
+\hline
+\end{tabular}
+\caption{Truth table for transitive inference.}
+\end{table}
+
+\end{document}

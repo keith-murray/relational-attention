@@ -207,3 +207,12 @@ marimo/_lsp/
 __marimo__/
 
 .DS_Store
+
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.bbl 
+*blg 
+*.out 
+*.xwm
