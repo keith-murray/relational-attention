@@ -6,6 +6,12 @@
 \usepackage[margin=0.6in]{geometry}  
 
 \begin{document}
+The attention mechanism can be plainly written as:
+\begin{gather*} 
+\operatorname{Attention}(Q, K, V)=\Phi( Q,K ) V\\
+\Phi(Q,K)=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)
+\end{gather*}
+
 The self-attention mechanism can be written as:
 \begin{align*} 
 \operatorname{Self}&\operatorname{Attention}(X; W_q, W_k, W_v) \\
