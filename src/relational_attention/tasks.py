@@ -81,7 +81,7 @@ class BlockComparisonDataset(Dataset):
 
 
 class TransitiveInferenceDataset(Dataset):
-    def __init__(self, num_samples=1000, num_items=5, train=True, seed=42):
+    def __init__(self, num_samples=1000, num_items=5, train=True, all=False, seed=42):
         """
         Transitive inference task:
         Items have a latent order A > B > C > D > E.
@@ -91,6 +91,7 @@ class TransitiveInferenceDataset(Dataset):
         self.num_samples = num_samples
         self.num_items = num_items
         self.train = train
+        self.all = all
         self.rng = np.random.default_rng(seed)
 
         # Define latent ordering (A < B < C < D < E)
@@ -104,7 +105,14 @@ class TransitiveInferenceDataset(Dataset):
 
     def _generate_pairs(self):
         """Define possible pairs for training and testing."""
-        if self.train:
+        if self.all and not self.train:
+            self.positive_pairs = [(i, j) for i in range(self.num_items)
+                                    for j in range(self.num_items)
+                                    if j > i]  # strictly forward
+            self.negative_pairs = [(j, i) for i in range(self.num_items)
+                                    for j in range(self.num_items)
+                                    if j > i]  # same but reversed
+        elif self.train and not self.all:
             # Adjacent pairs only
             self.positive_pairs = [(i, i + 1) for i in range(self.num_items - 1)]
             self.negative_pairs = [(i + 1, i) for i in range(self.num_items - 1)]
