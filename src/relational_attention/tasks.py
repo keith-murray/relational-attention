@@ -270,3 +270,50 @@ class XORDataset(Dataset):
 
     def __getitem__(self, idx):
         return self.data[idx], self.labels[idx]
+
+
+class ParityDataset(Dataset):
+    def __init__(self, num_samples=1000, num_bits=4, seed=42):
+        assert num_samples % 2 == 0, "num_samples must be even for balanced classes"
+
+        self.num_samples = num_samples
+        self.num_bits = num_bits
+        self.rng = np.random.default_rng(seed)
+
+        self.data, self.labels = self._generate_data()
+
+    def _generate_data(self):
+        half = self.num_samples // 2
+        X_odd = [self._generate_odd_parity() for _ in range(half)]
+        X_even = [self._generate_even_parity() for _ in range(half)]
+        X_all = X_odd + X_even
+        y_all = [1.0] * half + [0.0] * half
+
+        idxs = self.rng.permutation(self.num_samples)
+        X_all = [X_all[i] for i in idxs]
+        y_all = [y_all[i] for i in idxs]
+
+        X_tensor = torch.stack(X_all)  # (num_samples, num_bits)
+        X_tensor = X_tensor.unsqueeze(dim=1)
+        y_tensor = torch.tensor(y_all, dtype=torch.float32)
+        return X_tensor, y_tensor
+
+    def _generate_odd_parity(self):
+        vec = self.rng.integers(0, 2, size=self.num_bits)
+        if vec.sum() % 2 == 0:
+            flip_idx = self.rng.integers(0, self.num_bits)
+            vec[flip_idx] = 1 - vec[flip_idx]
+        return torch.tensor(vec, dtype=torch.float32)
+
+    def _generate_even_parity(self):
+        vec = self.rng.integers(0, 2, size=self.num_bits)
+        if vec.sum() % 2 == 1:
+            flip_idx = self.rng.integers(0, self.num_bits)
+            vec[flip_idx] = 1 - vec[flip_idx]
+        return torch.tensor(vec, dtype=torch.float32)
+
+    def __len__(self):
+        return self.num_samples
+
+    def __getitem__(self, idx):
+        return self.data[idx], self.labels[idx]
