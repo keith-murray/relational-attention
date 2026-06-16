@@ -1,0 +1,65 @@
+\documentclass[border=4pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{colortbl}
+\usepackage{array}
+\begin{document}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=black!60,
+    width=7.5cm,
+    arc=4pt,
+    boxrule=0.8pt,
+    title={\textbf{Ordinal relations: adjacent pair}},
+    fonttitle=\small
+]
+\small
+\textbf{Inputs} (one-hot encoded items, latent rank $A < B < C < D < E$):
+\[
+X = \begin{bmatrix}
+0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0
+\end{bmatrix}
+\begin{array}{l}
+\leftarrow \text{token 0: item } B \\
+\leftarrow \text{token 1: item } C
+\end{array}
+\]
+\vspace{0.5em}
+\textbf{Target:}
+\vspace{-1em}
+\[
+y = 1 \quad \text{(\textit{token 0 $<$ token 1})}
+\]
+\end{tcolorbox}
+\hspace{0.5em}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=black!60,
+    width=7.5cm,
+    arc=4pt,
+    boxrule=0.8pt,
+    title={\textbf{Ordinal relations: non-adjacent pair}},
+    fonttitle=\small
+]
+\small
+\textbf{Inputs} (one-hot encoded items, latent rank $A < B < C < D < E$):
+\[
+X = \begin{bmatrix}
+0 & 0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 & 0
+\end{bmatrix}
+\begin{array}{l}
+\leftarrow \text{token 0: item } D \\
+\leftarrow \text{token 1: item } B
+\end{array}
+\]
+\vspace{0.5em}
+\textbf{Target:}
+\vspace{-1em}
+\[
+y = 0 \quad \text{(\textit{token 0 $>$ token 1})}
+\]
+\end{tcolorbox}
+\end{document}
