@@ -12,11 +12,11 @@ Every experiment runs in seconds to minutes on a laptop CPU.
 
 A standard self-attention head computes values from its input. A **relational attention head** uses a learned value matrix $V$ that is the same for every input:
 
-$$
+```math
 \text{SelfAttention}(X) = \sigma\!\left(\tfrac{XW_q (XW_k)^\top}{\sqrt{d}}\right) XW_v
 \qquad
 \text{RelationalAttention}(X) = \sigma\!\left(\tfrac{XW_q (XW_k)^\top}{\sqrt{d}}\right) V
-$$
+```
 
 Here $\sigma$ is a row-wise softmax, or the identity for the *linear* variants. Since $V$ is fixed, the only information that reaches the classifier is the attention pattern, i.e. how the tokens relate to each other, not which tokens they are.
 
