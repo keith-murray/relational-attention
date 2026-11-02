@@ -1,7 +1,7 @@
 [project]
 name = "relational-attention"
 version = "0.1.0"
-description = "Add your description here"
+description = "Minimal attention mechanisms for relational tasks: XOR and ordinal relations"
 readme = "README.md"
 authors = [
     { name = "Keith T. Murray", email = "murraykeith64@gmail.com" }
@@ -10,14 +10,12 @@ requires-python = ">=3.13"
 dependencies = [
     "jupyter>=1.1.1",
     "matplotlib>=3.10.7",
+    "pandas>=2.3.3",
     "scipy>=1.16.3",
     "seaborn>=0.13.2",
     "torch>=2.9.0",
     "tqdm>=4.67.1",
 ]
-
-[project.scripts]
-relational-attention = "relational_attention:main"
 
 [build-system]
 requires = ["hatchling"]
